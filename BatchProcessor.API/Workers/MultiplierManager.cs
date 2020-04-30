@@ -12,7 +12,7 @@ namespace BatchProcessor.API.Workers
             var number = (Number)oNumber;
             
             //Delay
-            System.Threading.Thread.Sleep(500);
+            System.Threading.Thread.Sleep(1000 * random.Next(5, 10));
             // Generate Event
             NumberMultipliedEventArgs args = new NumberMultipliedEventArgs();
             args.Execution = number.Execution;

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using BatchProcessor.API.Models;
 using BatchProcessor.API.ViewModels;
 using BatchProcessor.Data.Data.Entities;
 
@@ -13,6 +14,7 @@ namespace BatchProcessor.API.Services
         {
             batchProgress = new BatchProgressViewModel();
             batchProgress.Numbers = new List<Number>();
+            batchProgress.State = State.Waiting;
         }
 
         public BatchProgressViewModel GetProgress()
@@ -32,6 +34,11 @@ namespace BatchProcessor.API.Services
                         && n.Value == number.Value);
             batchProgress.Numbers.Remove(n);
             batchProgress.Numbers.Add(number);
+        }
+
+        public void UpdateState(State state)
+        {
+            batchProgress.State = state;
         }
 
         public void SetProgress(int progress)

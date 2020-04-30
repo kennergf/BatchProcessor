@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace BatchProcessor.API.Models
 {
     public class Input
@@ -7,7 +9,9 @@ namespace BatchProcessor.API.Models
             XBatches = xBatches;
             YNumbers = yNumbers;
         }
+        [Range(1, 10)]
         internal int XBatches { get; set; }
+        [Range(1, 10)]
         internal int YNumbers { get; set; }
     }
 }

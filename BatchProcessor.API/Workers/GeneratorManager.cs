@@ -17,7 +17,7 @@ namespace BatchProcessor.API.Workers
                 for(int j=0; j < input.YNumbers; j++)
                 {
                     //Delay
-                    System.Threading.Thread.Sleep(500);
+                    System.Threading.Thread.Sleep(1000 * random.Next(5, 10));
                     // Generate Event
                     NumberGeneratedEventArgs args = new NumberGeneratedEventArgs();
                     args.Execution = execution;

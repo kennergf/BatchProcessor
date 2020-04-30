@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Threading;
 using BatchProcessor.API.Models;
 using BatchProcessor.API.Services;
@@ -23,6 +20,7 @@ namespace BatchProcessor.API.Workers
                 if(tGeneratorManager == null || (tGeneratorManager.ThreadState == ThreadState.Stopped
                         || tMultiplierManager.ThreadState == ThreadState.Stopped))
                 {
+                    _memoryData.UpdateState(State.Processing);
                     CallGenerator(input);
                 }
                 else if(tGeneratorManager.ThreadState == ThreadState.Running
@@ -37,7 +35,7 @@ namespace BatchProcessor.API.Workers
             }
             catch (System.Exception)
             {
-                
+                _memoryData.UpdateState(State.Error);
                 throw;
             }
         }

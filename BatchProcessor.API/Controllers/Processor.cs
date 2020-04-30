@@ -1,10 +1,6 @@
-using System.Collections.Generic;
 using BatchProcessor.API.Workers;
 using Microsoft.AspNetCore.Mvc;
-using BatchProcessor.Data.Data.Entities;
 using BatchProcessor.API.ViewModels;
-using BatchProcessor.API.Services;
-using System.Threading;
 using BatchProcessor.API.Models;
 
 namespace BatchProcessor.API.Controllers
@@ -15,8 +11,16 @@ namespace BatchProcessor.API.Controllers
     {
         public void Execute(int XBatches, int YNumbers)
         {
-            var input = new Input(XBatches, YNumbers);
-            Processor.Start(input);
+            Input input;
+            try
+            {
+                input = new Input(XBatches, YNumbers);
+                Processor.Start(input);
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
         }
 
         [Route("GetProgress")]
