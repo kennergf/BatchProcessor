@@ -19,9 +19,14 @@ namespace BatchProcessor.Data.Services
             _db.Add(number);
         }
 
+        public void Add(BatchGroup batchGroup)
+        {
+            _db.Add(batchGroup);
+        }
+
         public IEnumerable GetByGroup(int groupId)
         {
-            return _db.BatchGroups.Where(bg => bg.Id == groupId);
+            return _db.Numbers.Where(bg => bg.Execution == groupId);
         }
 
         public int Commit()

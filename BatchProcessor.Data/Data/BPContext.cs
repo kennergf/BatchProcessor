@@ -8,8 +8,9 @@ namespace BatchProcessor.Data.Data
     public class BPContext : IdentityDbContext<User>
     {
         public DbSet<Number> Numbers { get; set; }
-        public DbSet<Batch> Batches { get; set; }
-        public DbSet<BatchGroup> BatchGroups { get; set; }
+        // TODO
+        // public DbSet<Batch> Batches { get; set; }
+        // public DbSet<BatchGroup> BatchGroups { get; set; }
 
         public BPContext(DbContextOptions<BPContext> options) : base(options)
         {

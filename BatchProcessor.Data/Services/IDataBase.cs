@@ -7,6 +7,12 @@ namespace BatchProcessor.Data.Services
     {
         void Add(Number number);
 
+        /// <summary>
+        /// Add a BatchGroup to the DataBase
+        /// </summary>
+        /// <param name="batchGroup"></param>
+        void Add(BatchGroup batchGroup);
+
         IEnumerable GetByGroup(int groupId);
 
         int Commit();
