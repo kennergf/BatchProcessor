@@ -27,7 +27,6 @@ namespace BatchProcessor.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            //services.AddScoped<IMemoryData, MemoryData>();
             services.AddCors();
         }
 

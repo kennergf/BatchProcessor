@@ -8,7 +8,7 @@ namespace BatchProcessor.API.Workers
 {
     internal static class Processor
     {
-        private static MemoryData _memoryData = new MemoryData();
+        private static MemoryDataManager _memoryDataManager = new MemoryDataManager();
         private static Number number;
         private static Thread tGeneratorManager;
         private static Thread tMultiplierManager;
@@ -20,7 +20,8 @@ namespace BatchProcessor.API.Workers
                 if(tGeneratorManager == null || (tGeneratorManager.ThreadState == ThreadState.Stopped
                         || tMultiplierManager.ThreadState == ThreadState.Stopped))
                 {
-                    _memoryData.UpdateState(State.Processing);
+                    _memoryDataManager = new MemoryDataManager();
+                    _memoryDataManager.UpdateState(State.Processing);
                     CallGenerator(input);
                 }
                 else if(tGeneratorManager.ThreadState == ThreadState.Running
@@ -35,14 +36,13 @@ namespace BatchProcessor.API.Workers
             }
             catch (System.Exception)
             {
-                _memoryData.UpdateState(State.Error);
+                _memoryDataManager.UpdateState(State.Error);
                 throw;
             }
         }
 
         private static void CallGenerator(Input input)
         {
-            _memoryData = new MemoryData();
             var generator = new GeneratorManager();
             generator.NumberGenerated += generator_NumberGenerated;
 
@@ -59,22 +59,22 @@ namespace BatchProcessor.API.Workers
             tMultiplierManager.Start(number);
         }
 
-        public static BatchProgressViewModel GetProgress()
+        public static MemoryData GetProgress()
         {
-            return _memoryData.GetProgress();
+            return _memoryDataManager.GetProgress();
         }
 
         static void generator_NumberGenerated(object sender, NumberGeneratedEventArgs e)
         {
             number = new Number(e.Execution, e.BatchSequence, e.Number);
-            _memoryData.AddNumber(number);
+            _memoryDataManager.AddNumber(number);
             CallMultiplier(number);
         }
 
         static void multiplier_NumberMultiplied(object sender, NumberMultipliedEventArgs e)
         {
             number = new Number(e.Execution, e.BatchSequence, e.Number, e.Total);
-            _memoryData.UpdateNumber(number);
+            _memoryDataManager.UpdateNumber(number);
         }
     }
 }
