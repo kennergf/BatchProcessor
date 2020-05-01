@@ -25,7 +25,7 @@ namespace BatchProcessor.API.Controllers
         }
 
         [Route("GetProgress")]
-        public BatchProgressViewModel GetProgress()
+        public MemoryData GetProgress()
         {
             return Processor.GetProgress();
         }
