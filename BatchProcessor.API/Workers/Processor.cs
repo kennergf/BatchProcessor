@@ -1,7 +1,6 @@
 using System.Threading;
 using BatchProcessor.API.Models;
 using BatchProcessor.API.Services;
-using BatchProcessor.API.ViewModels;
 using BatchProcessor.Data.Data.Entities;
 
 namespace BatchProcessor.API.Workers
@@ -75,6 +74,7 @@ namespace BatchProcessor.API.Workers
         {
             number = new Number(e.Execution, e.BatchSequence, e.Number, e.Total);
             _memoryDataManager.UpdateNumber(number);
+            // TODO Add to DB
         }
     }
 }

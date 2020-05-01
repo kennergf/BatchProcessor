@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using System.Linq;
 using BatchProcessor.API.Models;
-using BatchProcessor.API.ViewModels;
 using BatchProcessor.Data.Data.Entities;
 
 namespace BatchProcessor.API.Services
@@ -43,7 +41,8 @@ namespace BatchProcessor.API.Services
 
         public void SetProgress(int progress)
         {
-            _MemoryData.Progress = progress;
+            // TODO
+            //_MemoryData.Progress = progress;
         }
     }
 }

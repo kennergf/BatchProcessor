@@ -1,7 +1,7 @@
 using BatchProcessor.API.Workers;
 using Microsoft.AspNetCore.Mvc;
-using BatchProcessor.API.ViewModels;
 using BatchProcessor.API.Models;
+using BatchProcessor.API.Services;
 
 namespace BatchProcessor.API.Controllers
 {
