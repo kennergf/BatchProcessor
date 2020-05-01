@@ -9,17 +9,18 @@ namespace BatchProcessor.API.Controllers
     [Route("[controller]")]
     public class ProcessorController : ControllerBase
     {
-        public void Execute(int XBatches, int YNumbers)
+        [HttpPost]
+        [Route("Execute")]
+        public string Execute(Input input)
         {
-            Input input;
             try
             {
-                input = new Input(XBatches, YNumbers);
                 Processor.Start(input);
+                return "OK";
             }
             catch (System.Exception)
             {
-                throw;
+                return "Error";
             }
         }
 

@@ -26,7 +26,7 @@ namespace BatchProcessor.API.Workers
                 else if(tGeneratorManager.ThreadState == ThreadState.Running
                         || tMultiplierManager.ThreadState == ThreadState.Running)
                 {
-
+                    // TODO return message
                 }
                 else
                 {
