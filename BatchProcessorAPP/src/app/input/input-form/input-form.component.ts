@@ -35,8 +35,8 @@ export class InputFormComponent implements OnInit {
     if(form != null)
       form.form.reset();
     this.service.formData = {
-      XBatches: 0,
-      YNumbers: 0
+      XBatches: null,
+      YNumbers: null
     }
   }
 

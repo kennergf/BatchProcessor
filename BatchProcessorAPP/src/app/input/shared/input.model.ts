@@ -1,4 +1,4 @@
 export class Input {
-    XBatches :number;
+    XBatches: number;
     YNumbers: number;
 }

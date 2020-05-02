@@ -10,19 +10,21 @@ import { HttpClientModule } from '@angular/common/http';
 import { InputFormComponent } from './input/input-form/input-form.component';
 import { InputGridComponent } from './input/input-grid/input-grid.component';
 import { InputService } from './input/shared/input.service';
+import { ConsultBatchComponent } from './consult-batch/consult-batch.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InputComponent,
     InputFormComponent,
-    InputGridComponent
+    InputGridComponent,
+    ConsultBatchComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [InputService],
   bootstrap: [AppComponent]

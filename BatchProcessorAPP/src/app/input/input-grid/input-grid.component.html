@@ -1,1 +1,22 @@
-<p>input-grid works!</p>
+<div>
+    {{ batchLot.grandTotal }}
+</div>
+<div>
+    {{ batchLot.remainingNumbers }}
+</div>
+<table class="table">
+    <!-- <tr>
+        <td>{{ batchLot.batches[0].numbers[0].number }}</td>
+        <td>{{ batchLot.numbers[0].total }}</td>
+    </tr> -->
+    <tr *ngFor="let bt of batchLot.batches">
+        <td>
+            <table class="table">
+                <tr *ngFor="let nb of bt">
+                    <td>{{nb.number}}</td>
+                    <td>{{nb.total}}</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
