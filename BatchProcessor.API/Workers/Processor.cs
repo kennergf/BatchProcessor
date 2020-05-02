@@ -2,6 +2,7 @@ using System.Threading;
 using BatchProcessor.API.Models;
 using BatchProcessor.API.Services;
 using BatchProcessor.Data.Data.Entities;
+using BatchProcessor.API.ViewModels;
 
 namespace BatchProcessor.API.Workers
 {
@@ -21,6 +22,7 @@ namespace BatchProcessor.API.Workers
                 {
                     _memoryDataManager = new MemoryDataManager();
                     _memoryDataManager.UpdateState(State.Processing);
+                    _memoryDataManager.UpdateGrandTotal(input.XBatches * input.YNumbers);
                     CallGenerator(input);
                 }
                 else if(tGeneratorManager.ThreadState == ThreadState.Running
@@ -58,7 +60,7 @@ namespace BatchProcessor.API.Workers
             tMultiplierManager.Start(number);
         }
 
-        public static MemoryData GetProgress()
+        public static BatchLotViewModel GetProgress()
         {
             return _memoryDataManager.GetProgress();
         }
@@ -74,6 +76,7 @@ namespace BatchProcessor.API.Workers
         {
             number = new Number(e.Execution, e.BatchSequence, e.Number, e.Total);
             _memoryDataManager.UpdateNumber(number);
+            _memoryDataManager.DecrementRemainingNumbers();
             // TODO Add to DB
         }
     }

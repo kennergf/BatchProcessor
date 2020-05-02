@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
 using BatchProcessor.API.Models;
+using BatchProcessor.API.ViewModels;
 using BatchProcessor.Data.Data.Entities;
 
 namespace BatchProcessor.API.Services
@@ -15,9 +17,24 @@ namespace BatchProcessor.API.Services
             _MemoryData.State = State.Waiting;
         }
 
-        public MemoryData GetProgress()
+        public BatchLotViewModel GetProgress()
         {
-            return _MemoryData;
+            var batchLotViewModel = new BatchLotViewModel();
+            batchLotViewModel.GrandTotal = _MemoryData.GrandTotal;
+            batchLotViewModel.RemainingNumbers = _MemoryData.RemainingNumbers;
+            var listGroupNumber = _MemoryData.Numbers.GroupBy(n => n.BatchSequence).ToList();
+            foreach(var groupNumber in listGroupNumber)
+            {
+                var listNumber = groupNumber.ToList();
+                var listBatchVM = new List<BatchViewModel>();
+                foreach(var n in listNumber)
+                {
+                    listBatchVM.Add(new BatchViewModel(n.Value, n.Total));
+                }
+                batchLotViewModel.Numbers.Add(listBatchVM);
+            }
+
+            return batchLotViewModel;
         }
 
         public void AddNumber(Number number)
@@ -39,10 +56,15 @@ namespace BatchProcessor.API.Services
             _MemoryData.State = state;
         }
 
-        public void SetProgress(int progress)
+        public void DecrementRemainingNumbers()
         {
-            // TODO
-            //_MemoryData.Progress = progress;
+            _MemoryData.RemainingNumbers--;
+        }
+
+        public void UpdateGrandTotal(int grandTotal)
+        {
+            _MemoryData.GrandTotal = grandTotal;
+            _MemoryData.RemainingNumbers = grandTotal;
         }
     }
 }

@@ -1,7 +1,7 @@
 using BatchProcessor.API.Workers;
 using Microsoft.AspNetCore.Mvc;
 using BatchProcessor.API.Models;
-using BatchProcessor.API.Services;
+using BatchProcessor.API.ViewModels;
 
 namespace BatchProcessor.API.Controllers
 {
@@ -9,6 +9,11 @@ namespace BatchProcessor.API.Controllers
     [Route("[controller]")]
     public class ProcessorController : ControllerBase
     {
+        public string Test(int XBatches, int YNumbers)
+        {
+            return Execute(new Input(XBatches, YNumbers));
+        }
+
         [HttpPost]
         [Route("Execute")]
         public string Execute(Input input)
@@ -24,8 +29,9 @@ namespace BatchProcessor.API.Controllers
             }
         }
 
+        [HttpGet]
         [Route("GetProgress")]
-        public MemoryData GetProgress()
+        public BatchLotViewModel GetProgress()
         {
             return Processor.GetProgress();
         }
