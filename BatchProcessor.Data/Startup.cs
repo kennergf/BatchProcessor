@@ -1,5 +1,6 @@
 using BatchProcessor.Data.Data;
 using BatchProcessor.Data.Entities;
+using BatchProcessor.Data.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -28,6 +29,7 @@ namespace BatchProcessor.Data
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<BPContext>()
                 .AddDefaultTokenProviders();
+            services.AddScoped<IDataBase, DataBase>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

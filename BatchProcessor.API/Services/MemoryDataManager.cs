@@ -3,6 +3,7 @@ using System.Linq;
 using BatchProcessor.API.Models;
 using BatchProcessor.API.ViewModels;
 using BatchProcessor.Data.Entities;
+using BatchProcessor.Data.Services;
 
 namespace BatchProcessor.API.Services
 {
@@ -65,6 +66,17 @@ namespace BatchProcessor.API.Services
         {
             _MemoryData.GrandTotal = grandTotal;
             _MemoryData.RemainingNumbers = grandTotal;
+        }
+
+        public void HasFinished(IDataBase db)
+        {
+            if(_MemoryData.State == State.Processing &&
+                _MemoryData.RemainingNumbers == 0)
+            {
+                UpdateState(State.Finished);
+                db.Add(_MemoryData.Numbers);
+                db.Commit();
+            }
         }
     }
 }

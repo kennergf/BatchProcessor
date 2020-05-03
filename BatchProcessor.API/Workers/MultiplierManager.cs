@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using BatchProcessor.Data.Entities;
 
 namespace BatchProcessor.API.Workers

@@ -13,6 +13,12 @@ namespace BatchProcessor.Data.Services
         void Add(Number number);
 
         /// <summary>
+        /// Add a list of numbers to the DataBase
+        /// </summary>
+        /// <param name="numbers"></param>
+        void Add(List<Number> numbers);
+
+        /// <summary>
         /// Get the total of numbers ever generated
         /// </summary>
         /// <returns></returns>

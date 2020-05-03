@@ -2,6 +2,8 @@ using BatchProcessor.API.Workers;
 using Microsoft.AspNetCore.Mvc;
 using BatchProcessor.API.Models;
 using BatchProcessor.API.ViewModels;
+using BatchProcessor.Data.Services;
+using System.Threading.Tasks;
 
 namespace BatchProcessor.API.Controllers
 {
@@ -9,6 +11,15 @@ namespace BatchProcessor.API.Controllers
     [Route("[controller]")]
     public class ProcessorController : ControllerBase
     {
+        private Processor _Processor;
+        private IDataBase _db;
+
+        public ProcessorController(IDataBase db)
+        {
+            _db = db;
+            _Processor = new Processor(db);
+        }
+
         public string Test(int XBatches, int YNumbers)
         {
             return Execute(new Input(XBatches, YNumbers));
@@ -20,7 +31,7 @@ namespace BatchProcessor.API.Controllers
         {
             try
             {
-                Processor.Start(input);
+                _Processor.Start(input);
                 return "OK";
             }
             catch (System.Exception)
@@ -33,7 +44,8 @@ namespace BatchProcessor.API.Controllers
         [Route("GetProgress")]
         public BatchLotViewModel GetProgress()
         {
-            return Processor.GetProgress();
+            _Processor.HasFinished();
+            return _Processor.GetProgress();
         }
     }
 }

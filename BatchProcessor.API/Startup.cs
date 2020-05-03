@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BatchProcessor.API.Services;
+using BatchProcessor.Data.Data;
+using BatchProcessor.Data.Entities;
 using BatchProcessor.Data.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -29,8 +33,9 @@ namespace BatchProcessor.API
         {
             services.AddControllers();
             services.AddCors();
+            services.AddDbContext<BPContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             // Add DataBase using DI to be easy to change for NoSQL for example
-            //services.AddScoped<IDataBase, DataBase>();
+            services.AddScoped<IDataBase, DataBase>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

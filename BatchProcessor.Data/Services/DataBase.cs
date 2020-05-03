@@ -20,6 +20,11 @@ namespace BatchProcessor.Data.Services
             _db.Add(number);
         }
 
+        public void Add(List<Number> numbers)
+        {
+            numbers.ForEach(n => Add(n));
+        }
+
         public long GetGrandTotal()
         {
             return _db.Numbers.LongCount();

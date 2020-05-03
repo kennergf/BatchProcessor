@@ -3,17 +3,24 @@ using BatchProcessor.API.Models;
 using BatchProcessor.API.Services;
 using BatchProcessor.Data.Entities;
 using BatchProcessor.API.ViewModels;
+using BatchProcessor.Data.Services;
 
 namespace BatchProcessor.API.Workers
 {
-    internal static class Processor
+    internal class Processor
     {
         private static MemoryDataManager _memoryDataManager = new MemoryDataManager();
-        private static Number number;
-        private static Thread tGeneratorManager;
-        private static Thread tMultiplierManager;
+        private Number number;
+        private Thread tGeneratorManager;
+        private Thread tMultiplierManager;
+        private IDataBase _db;
 
-        internal static void Start(Input input)
+        public Processor(IDataBase db)
+        {
+            _db = db;
+        }
+
+        internal void Start(Input input)
         {
             try
             {
@@ -42,7 +49,7 @@ namespace BatchProcessor.API.Workers
             }
         }
 
-        private static void CallGenerator(Input input)
+        private void CallGenerator(Input input)
         {
             var generator = new GeneratorManager();
             generator.NumberGenerated += generator_NumberGenerated;
@@ -51,7 +58,7 @@ namespace BatchProcessor.API.Workers
             tGeneratorManager.Start(input);
         }
 
-        private static void CallMultiplier(Number number)
+        private void CallMultiplier(Number number)
         {
             var multiplier = new MultiplierManager();
             multiplier.NumberMultiplied += multiplier_NumberMultiplied;
@@ -60,24 +67,28 @@ namespace BatchProcessor.API.Workers
             tMultiplierManager.Start(number);
         }
 
-        public static BatchLotViewModel GetProgress()
+        public BatchLotViewModel GetProgress()
         {
             return _memoryDataManager.GetProgress();
         }
+        
+        public void HasFinished()
+        {
+            _memoryDataManager.HasFinished(_db);
+        }
 
-        static void generator_NumberGenerated(object sender, NumberGeneratedEventArgs e)
+        void generator_NumberGenerated(object sender, NumberGeneratedEventArgs e)
         {
             number = new Number(e.Execution, e.BatchSequence, e.Number);
             _memoryDataManager.AddNumber(number);
             CallMultiplier(number);
         }
 
-        static void multiplier_NumberMultiplied(object sender, NumberMultipliedEventArgs e)
+        void multiplier_NumberMultiplied(object sender, NumberMultipliedEventArgs e)
         {
             number = new Number(e.Execution, e.BatchSequence, e.Number, e.Total);
             _memoryDataManager.UpdateNumber(number);
             _memoryDataManager.DecrementRemainingNumbers();
-            // TODO Add to DB
         }
     }
 }

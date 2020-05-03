@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>35f9ab55-c373-46a2-b7b6-aef261e941c9</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\BatchProcessor.Data\BatchProcessor.Data.csproj"/>
