@@ -5,6 +5,8 @@ export class Batch implements Deserializable {
     total: number;
 
     deserialize(input: any): this {
+        console.log('Batch');
+        console.log(input);
         return Object.assign(this, input);
     }
 }
