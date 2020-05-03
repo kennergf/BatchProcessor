@@ -1,7 +1,7 @@
 using System.Threading;
 using BatchProcessor.API.Models;
 using BatchProcessor.API.Services;
-using BatchProcessor.Data.Data.Entities;
+using BatchProcessor.Data.Entities;
 using BatchProcessor.API.ViewModels;
 
 namespace BatchProcessor.API.Workers

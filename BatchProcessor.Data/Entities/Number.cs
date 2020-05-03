@@ -1,7 +1,7 @@
 
 using System.ComponentModel.DataAnnotations;
 
-namespace BatchProcessor.Data.Data.Entities
+namespace BatchProcessor.Data.Entities
 {
     public class Number
     {

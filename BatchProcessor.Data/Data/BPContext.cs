@@ -1,5 +1,4 @@
-
-using BatchProcessor.Data.Data.Entities;
+using BatchProcessor.Data.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

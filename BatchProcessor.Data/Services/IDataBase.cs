@@ -1,20 +1,34 @@
 using System.Collections;
-using BatchProcessor.Data.Data.Entities;
+using System.Collections.Generic;
+using BatchProcessor.Data.Entities;
 
 namespace BatchProcessor.Data.Services
 {
     public interface IDataBase
     {
+        /// <summary>
+        /// Add a number to the DataBase
+        /// </summary>
+        /// <param name="number"></param>
         void Add(Number number);
 
         /// <summary>
-        /// Add a BatchGroup to the DataBase
+        /// Get the total of numbers ever generated
         /// </summary>
-        /// <param name="batchGroup"></param>
-        void Add(BatchGroup batchGroup);
+        /// <returns></returns>
+        long GetGrandTotal();
 
-        IEnumerable GetByGroup(int groupId);
+        /// <summary>
+        /// Return a List of Number by Execution
+        /// </summary>
+        /// <param name="execution"></param>
+        /// <returns></returns>
+        List<Number> GetByExecution(int execution);
 
+        /// <summary>
+        /// Commit the alteration to the DataBase
+        /// </summary>
+        /// <returns></returns>
         int Commit();
     }
 }

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using BatchProcessor.API.Models;
-using BatchProcessor.Data.Data.Entities;
+using BatchProcessor.Data.Entities;
 
 namespace BatchProcessor.API.Services
 {

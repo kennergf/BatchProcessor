@@ -1,7 +1,8 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using BatchProcessor.Data.Data;
-using BatchProcessor.Data.Data.Entities;
+using BatchProcessor.Data.Entities;
 
 namespace BatchProcessor.Data.Services
 {
@@ -19,14 +20,14 @@ namespace BatchProcessor.Data.Services
             _db.Add(number);
         }
 
-        public void Add(BatchGroup batchGroup)
+        public long GetGrandTotal()
         {
-            _db.Add(batchGroup);
+            return _db.Numbers.LongCount();
         }
 
-        public IEnumerable GetByGroup(int groupId)
+        public List<Number> GetByExecution(int execution)
         {
-            return _db.Numbers.Where(bg => bg.Execution == groupId);
+            return _db.Numbers.Where(n => n.Execution == execution).ToList();
         }
 
         public int Commit()

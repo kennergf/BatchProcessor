@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using BatchProcessor.API.Models;
-using BatchProcessor.Data.Data.Entities;
+using BatchProcessor.Data.Entities;
 
 namespace BatchProcessor.API.Workers
 {

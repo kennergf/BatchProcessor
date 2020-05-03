@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using BatchProcessor.API.Models;
 using BatchProcessor.API.ViewModels;
-using BatchProcessor.Data.Data.Entities;
+using BatchProcessor.Data.Entities;
 
 namespace BatchProcessor.API.Services
 {
