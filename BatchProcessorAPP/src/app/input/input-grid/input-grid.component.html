@@ -4,10 +4,10 @@
 <div>
     {{ batchLot.remainingNumbers }}
 </div>
-<table class="table">
+<table class="table table-hover">
     <tr *ngFor="let bt of batchLot.numbers">
         <td>
-            <table class="table">
+            <table class="table table-hover">
                 <tr *ngFor="let nb of bt">
                     <td>{{nb.number}}</td>
                     <td>{{nb.total}}</td>
