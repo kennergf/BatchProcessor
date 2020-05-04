@@ -18,11 +18,12 @@ namespace BatchProcessor.API.Services
             _MemoryData.State = State.Waiting;
         }
 
-        public BatchLotViewModel GetProgress()
+        public BatchLotViewModel GetProgress(IDataBase db)
         {
             var batchLotViewModel = new BatchLotViewModel();
-            batchLotViewModel.GrandTotal = _MemoryData.GrandTotal;
+            batchLotViewModel.CurrentTotal = _MemoryData.CurrentTotal;
             batchLotViewModel.RemainingNumbers = _MemoryData.RemainingNumbers;
+            batchLotViewModel.GrandTotal = GetGrandTotal(db);
             var listGroupNumber = _MemoryData.Numbers.GroupBy(n => n.BatchSequence).ToList();
             foreach(var groupNumber in listGroupNumber)
             {
@@ -62,10 +63,10 @@ namespace BatchProcessor.API.Services
             _MemoryData.RemainingNumbers--;
         }
 
-        public void UpdateGrandTotal(int grandTotal)
+        public void SetCurrentTotal(int currentTotal)
         {
-            _MemoryData.GrandTotal = grandTotal;
-            _MemoryData.RemainingNumbers = grandTotal;
+            _MemoryData.CurrentTotal = currentTotal;
+            _MemoryData.RemainingNumbers = currentTotal;
         }
 
         public void HasFinished(IDataBase db)
@@ -76,6 +77,27 @@ namespace BatchProcessor.API.Services
                 UpdateState(State.Finished);
                 db.Add(_MemoryData.Numbers);
                 db.Commit();
+            }
+        }
+
+        private long GetGrandTotal(IDataBase db)
+        {
+            if(_MemoryData.GrandTotal == 0 || _MemoryData.State == State.Finished)
+            {
+                _MemoryData.GrandTotal = db.GetGrandTotal();
+                if(_MemoryData.State == State.Finished)
+                {
+                    UpdateState(State.Waiting);
+                }
+            }
+
+            if(_MemoryData.State == State.Processing)
+            {
+                return _MemoryData.GrandTotal + _MemoryData.CurrentTotal;
+            }
+            else
+            {
+                return _MemoryData.GrandTotal;
             }
         }
     }

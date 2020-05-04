@@ -11,6 +11,7 @@ namespace BatchProcessor.API.ViewModels
 
         public List<List<BatchViewModel>> Numbers { get; set; }
         public int RemainingNumbers { get; set; }
-        public int GrandTotal { get; set; }
+        public int CurrentTotal { get; set; }
+        public long GrandTotal { get; set; }
     }
 }

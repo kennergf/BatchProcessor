@@ -26,11 +26,5 @@ export class InputService {
     return this.http.get<BatchLot>(this.rootURL + '/GetProgress')
       .pipe(map(data => new BatchLot().deserialize(data)),
       catchError(()=> throwError('Error request or deserialize')));
-    // timer(0, 2000).pipe(
-    //   switchMap(_ => this.http.get(this.rootURL + '/GetProgress')),
-    //   // .toPromise()
-    //   // .then(res => this.grid = res as BatchLot)),
-    //   catchError(error => of(`Bad request: ${error}`))
-    // );
   }
 }

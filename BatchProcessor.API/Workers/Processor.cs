@@ -29,7 +29,7 @@ namespace BatchProcessor.API.Workers
                 {
                     _memoryDataManager = new MemoryDataManager();
                     _memoryDataManager.UpdateState(State.Processing);
-                    _memoryDataManager.UpdateGrandTotal(input.XBatches * input.YNumbers);
+                    _memoryDataManager.SetCurrentTotal(input.XBatches * input.YNumbers);
                     CallGenerator(input);
                 }
                 else if(tGeneratorManager.ThreadState == ThreadState.Running
@@ -69,7 +69,7 @@ namespace BatchProcessor.API.Workers
 
         public BatchLotViewModel GetProgress()
         {
-            return _memoryDataManager.GetProgress();
+            return _memoryDataManager.GetProgress(_db);
         }
         
         public void HasFinished()

@@ -15,6 +15,8 @@ namespace BatchProcessor.API.Services
         [DataMember]
         public int RemainingNumbers { get; set; }
         [DataMember]
-        public int GrandTotal { get; set; }
+        public int CurrentTotal { get; set; }
+        [DataMember]
+        public long GrandTotal { get; set; }
     }
 }

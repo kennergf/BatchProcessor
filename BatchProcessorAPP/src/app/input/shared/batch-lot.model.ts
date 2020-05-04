@@ -4,6 +4,7 @@ import { Deserializable } from './deserializable.model';
 export class BatchLot implements Deserializable {
     batches: Batches[];
     remainingNumbers: number;
+    currentTotal: number;
     grandTotal: number;
 
     deserialize(input: any){
