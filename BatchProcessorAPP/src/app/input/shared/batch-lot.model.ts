@@ -1,8 +1,10 @@
 import { Batches } from './batches.model';
 import { Deserializable } from './deserializable.model';
+import { Batch } from './batch.model';
 
 export class BatchLot implements Deserializable {
     batches: Batches[];
+    numbers: Array<Array<Batch>>;
     remainingNumbers: number;
     currentTotal: number;
     grandTotal: number;
