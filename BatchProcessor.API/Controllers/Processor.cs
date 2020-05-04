@@ -31,8 +31,13 @@ namespace BatchProcessor.API.Controllers
         {
             try
             {
-                _Processor.Start(input);
-                return "OK";
+                if(input.Validate())
+                {
+                    _Processor.Start(input);
+                    return "OK";
+                }
+
+                return "Invalid Input!";
             }
             catch (System.Exception)
             {
