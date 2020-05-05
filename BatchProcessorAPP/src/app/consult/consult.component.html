@@ -1,7 +1,9 @@
 <table class="table table-hover">
   <tr *ngFor="let ex of service.executions">
     <td>
-      {{ ex }}
+      <a [routerLink]="['/execution', ex]">
+        {{ ex }}
+      </a>
     </td>
   </tr>
 </table>

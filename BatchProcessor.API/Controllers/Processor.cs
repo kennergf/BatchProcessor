@@ -69,11 +69,11 @@ namespace BatchProcessor.API.Controllers
         }
 
         [Route("GetBatchesByExecution")]
-        public List<List<BatchViewModel>> GetBatchesByExecution(long execution)
+        public List<List<BatchViewModel>> GetBatchesByExecution(long Id)
         {
             try
             {
-                var numbers = _db.GetByExecution(execution);
+                var numbers = _db.GetByExecution(Id);
                 return BatchProfile.ConvertNumbersToBatches(numbers);
             }
             catch(Exception)

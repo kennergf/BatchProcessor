@@ -15,7 +15,8 @@ import { ExecutionComponent } from './execution/execution.component';
 const routes: Routes = [
   { path: '', redirectTo: 'generate', pathMatch: 'full' },
   { path: 'generate', component: GenerateComponent },
-  { path: 'consult', component: ConsultComponent }
+  { path: 'consult', component: ConsultComponent },
+  { path: 'execution/:id', component: ExecutionComponent }
 ]
 
 @NgModule({
