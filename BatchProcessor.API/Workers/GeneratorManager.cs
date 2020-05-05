@@ -3,7 +3,7 @@ using BatchProcessor.API.Models;
 
 namespace BatchProcessor.API.Workers
 {
-    public class GeneratorManager
+    public class GeneratorManager : WorkerConstants
     {
         public void Run(object oInput)
         {
@@ -15,12 +15,12 @@ namespace BatchProcessor.API.Workers
                 for(int j=0; j < input.YNumbers; j++)
                 {
                     //Delay
-                    System.Threading.Thread.Sleep(1000 * random.Next(5, 10));
+                    System.Threading.Thread.Sleep(1000 * random.Next(MinDelay, MaxDelay));
                     // Generate Event
                     NumberGeneratedEventArgs args = new NumberGeneratedEventArgs();
                     args.Execution = execution;
                     args.BatchSequence = i;
-                    args.Number = random.Next(1, 100);
+                    args.Number = random.Next(MinNumber, MaxNumber);
                     OnNumberGenerated(args);
                 }
             }

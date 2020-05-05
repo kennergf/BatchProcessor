@@ -3,7 +3,7 @@ using BatchProcessor.Data.Entities;
 
 namespace BatchProcessor.API.Workers
 {
-    public class MultiplierManager
+    public class MultiplierManager : WorkerConstants
     {
         internal void Run(object oNumber)
         {
@@ -11,13 +11,13 @@ namespace BatchProcessor.API.Workers
             var number = (Number)oNumber;
             
             //Delay
-            System.Threading.Thread.Sleep(1000 * random.Next(5, 10));
+            System.Threading.Thread.Sleep(1000 * random.Next(MinDelay, MaxDelay));
             // Generate Event
             NumberMultipliedEventArgs args = new NumberMultipliedEventArgs();
             args.Execution = number.Execution;
             args.BatchSequence = number.BatchSequence;
             args.Number = number.Value;
-            args.Total = random.Next(2, 4) * number.Value;
+            args.Total = random.Next(MinMultiplier, MaxMultiplier) * number.Value;
             OnNumberMultiplied(args);
         }
 
