@@ -4,6 +4,9 @@ using BatchProcessor.API.Models;
 using BatchProcessor.API.ViewModels;
 using BatchProcessor.Data.Services;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using BatchProcessor.API.Profile;
+using System;
 
 namespace BatchProcessor.API.Controllers
 {
@@ -51,6 +54,26 @@ namespace BatchProcessor.API.Controllers
         {
             _Processor.HasFinished();
             return _Processor.GetProgress();
+        }
+
+        [Route("GetExecutions")]
+        public List<long> GetExecutions()
+        {
+            return _db.GetExecutions();
+        }
+
+        [Route("GetBatchesByExecution")]
+        public List<List<BatchViewModel>> GetBatchesByExecution(long execution)
+        {
+            try
+            {
+                var numbers = _db.GetByExecution(execution);
+                return BatchProfile.ConvertNumbersToBatches(numbers);
+            }
+            catch(Exception)
+            {
+                return new List<List<BatchViewModel>>();
+            }
         }
     }
 }

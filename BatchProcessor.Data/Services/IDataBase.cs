@@ -29,7 +29,13 @@ namespace BatchProcessor.Data.Services
         /// </summary>
         /// <param name="execution"></param>
         /// <returns></returns>
-        List<Number> GetByExecution(int execution);
+        List<Number> GetByExecution(long execution);
+
+        /// <summary>
+        /// Get a list of distinct Executions
+        /// </summary>
+        /// <returns></returns>
+        List<long> GetExecutions();
 
         /// <summary>
         /// Commit the alteration to the DataBase

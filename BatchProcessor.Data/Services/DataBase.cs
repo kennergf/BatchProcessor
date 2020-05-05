@@ -30,9 +30,14 @@ namespace BatchProcessor.Data.Services
             return _db.Numbers.LongCount();
         }
 
-        public List<Number> GetByExecution(int execution)
+        public List<Number> GetByExecution(long execution)
         {
             return _db.Numbers.Where(n => n.Execution == execution).ToList();
+        }
+
+        public List<long> GetExecutions()
+        {
+            return _db.Numbers.Select(n => n.Execution).Distinct().ToList();
         }
 
         public int Commit()
