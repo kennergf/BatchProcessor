@@ -1,0 +1,21 @@
+<div>
+  {{ batches.currentTotal }}
+</div>
+<div>
+  {{ batches.remainingNumbers }}
+</div>
+<div>
+  {{ batches.grandTotal }}
+</div>
+<table class="table table-hover">
+  <tr *ngFor="let bt of batches.batches">
+      <td>
+          <table class="table table-hover">
+              <tr *ngFor="let un of bt">
+                  <td>{{un.number}}</td>
+                  <td>{{un.total}}</td>
+              </tr>
+          </table>
+      </td>
+  </tr>
+</table>

@@ -1,0 +1,30 @@
+<form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <div class="input-group-text bg-white">
+          <i class="far fa-credit-card" [class.green-icon]="XBatches.valid"
+            [class.red-icon]="XBatches.invalid && XBatches.touched"></i>
+        </div>
+      </div>
+      <input type="number" name="XBatches" #XBatches="ngModel" [(ngModel)]="service.formData.XBatches"
+        class="form-control" placeholder="Digit between 1 and 10 Batches" required maxlength="10" minlength="1">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <div class="input-group-text bg-white">
+          <i class="fas fa-user-circle" [class.green-icon]="YNumbers.valid"
+            [class.red-icon]="YNumbers.invalid && YNumbers.touched"></i>
+        </div>
+      </div>
+      <input type="number" name="YNumbers" #YNumbers="ngModel" [(ngModel)]="service.formData.YNumbers"
+        class="form-control" placeholder="Digit between 1 and 10 Number" required maxlength="10" minlength="1">
+    </div>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-success btn-lg btn-block" type="submit" [disabled]="form.invalid"><i
+        class="fas fa-database"></i> Submit</button>
+  </div>
+</form>

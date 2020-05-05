@@ -1,3 +1,19 @@
-<div class="container">
-  <app-input></app-input>
+<div class="page-header">
+  <div class="container">
+    <h1>Generate Batches of Numbers</h1>
+    <div class="navLinks">
+      <a [routerLink]="['/generate']">Generate</a>
+      <a [routerLink]="['/consult']">Consult</a>
+      <a [routerLink]="['/contact']">Contact Us</a>
+      |
+      <a [routerLink]="['/about']">About Us</a>
+      <a [routerLink]="['/login']">Login</a>
+      <a [routerLink]="['/protected']">Protected</a>
+    </div>
+  </div>
+</div>
+<div id="content">
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
 </div>
