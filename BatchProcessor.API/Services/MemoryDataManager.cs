@@ -39,6 +39,11 @@ namespace BatchProcessor.API.Services
             return batchLotViewModel;
         }
 
+        public State GetCurrentProcessingState()
+        {
+            return _MemoryData.State;
+        }
+
         public void AddNumber(Number number)
         {
             _MemoryData.Numbers.Add(number);

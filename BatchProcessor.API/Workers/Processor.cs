@@ -71,6 +71,11 @@ namespace BatchProcessor.API.Workers
         {
             return _memoryDataManager.GetProgress(_db);
         }
+
+        public State GetCurrentProcessingState()
+        {
+            return _memoryDataManager.GetCurrentProcessingState();
+        }
         
         public void HasFinished()
         {

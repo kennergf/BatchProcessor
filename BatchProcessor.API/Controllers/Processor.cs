@@ -56,6 +56,12 @@ namespace BatchProcessor.API.Controllers
             return _Processor.GetProgress();
         }
 
+        [Route("GetCurrentProcessingState")]
+        public State GetCurrentProcessingState()
+        {
+            return _Processor.GetCurrentProcessingState();
+        }
+
         [Route("GetExecutions")]
         public List<long> GetExecutions()
         {
