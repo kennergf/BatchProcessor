@@ -35,7 +35,10 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes),
   ],
-  providers: [/* GenerateService */],
+  providers: [
+    { provide: "API_URL", useValue: "http://localhost:5000/Processor" },
+    { provide: "ERROR_MSG_API", useValue: "Could not connect to the API, please verify the connection!" }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
