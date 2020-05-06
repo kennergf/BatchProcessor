@@ -32,17 +32,17 @@ namespace BatchProcessor.API.Workers
                     _memoryDataManager.UpdateState(State.Processing);
                     _memoryDataManager.SetCurrentTotal(input.XBatches * input.YNumbers);
                     CallGenerator(input);
-                    return "Started";
+                    return "[  { \"Message\": \"Started\"  } ]";
                 }
                 else
                 {
-                    return "Already Processing";
+                    return "[  { \"Message\": \"Already Processing\"  } ]";
                 }
             }
             catch (System.Exception)
             {
                 _memoryDataManager.UpdateState(State.Error);
-                return "Error";
+                return "[  { \"Message\": \"Error\"  } ]";
             }
         }
 

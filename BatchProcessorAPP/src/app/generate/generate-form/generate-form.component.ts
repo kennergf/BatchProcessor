@@ -28,6 +28,7 @@ export class GenerateFormComponent implements OnInit {
   onSubmit(form: NgForm) {
     this.service.postInput().subscribe(
       res => {
+        console.log(res);
         this.resetForm(form);
         this.service.getProgress();
       },

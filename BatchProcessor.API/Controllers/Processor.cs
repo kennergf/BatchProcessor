@@ -43,7 +43,7 @@ namespace BatchProcessor.API.Controllers
             }
             catch (System.Exception)
             {
-                return "Error";
+                return "[  { \"Message\": \"Error\"  } ]";
             }
         }
 
