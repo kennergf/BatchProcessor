@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using BatchProcessor.API.Models;
 using BatchProcessor.API.ViewModels;
 using BatchProcessor.Data.Services;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 using BatchProcessor.API.Profile;
 using System;
+using BatchProcessor.API.Services;
 
 namespace BatchProcessor.API.Controllers
 {
@@ -17,10 +17,10 @@ namespace BatchProcessor.API.Controllers
         private Processor _Processor;
         private IDataBase _db;
 
-        public ProcessorController(IDataBase db)
+        public ProcessorController(IDataBase db, IMemoryDataManager mdm)
         {
             _db = db;
-            _Processor = new Processor(db);
+            _Processor = new Processor(db, mdm);
         }
 
         public string Test(int XBatches, int YNumbers)
@@ -36,8 +36,7 @@ namespace BatchProcessor.API.Controllers
             {
                 if(input.Validate())
                 {
-                    _Processor.Start(input);
-                    return "OK";
+                    return _Processor.Start(input);
                 }
 
                 return "Invalid Input!";

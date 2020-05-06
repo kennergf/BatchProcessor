@@ -7,15 +7,13 @@ using BatchProcessor.Data.Services;
 
 namespace BatchProcessor.API.Services
 {
-    public class MemoryDataManager
+    public class MemoryDataManager : IMemoryDataManager
     {
-        private MemoryData _MemoryData;
+        private static MemoryData _MemoryData = new MemoryData();
 
         public MemoryDataManager()
         {
-            _MemoryData = new MemoryData();
             _MemoryData.Numbers = new List<Number>();
-            _MemoryData.State = State.Waiting;
         }
 
         public BatchLotViewModel GetProgress(IDataBase db)

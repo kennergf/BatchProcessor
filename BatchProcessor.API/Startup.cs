@@ -36,6 +36,7 @@ namespace BatchProcessor.API
             services.AddDbContext<BPContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             // Add DataBase using DI to be easy to change for NoSQL for example
             services.AddScoped<IDataBase, DataBase>();
+            services.AddSingleton<IMemoryDataManager, MemoryDataManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -29,6 +29,7 @@ namespace BatchProcessor.Data
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<BPContext>()
                 .AddDefaultTokenProviders();
+            // Add DataBase using DI to be easy to change for NoSQL for example
             services.AddScoped<IDataBase, DataBase>();
         }
 

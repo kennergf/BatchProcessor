@@ -9,43 +9,40 @@ namespace BatchProcessor.API.Workers
 {
     internal class Processor
     {
-        private static MemoryDataManager _memoryDataManager = new MemoryDataManager();
         private Number number;
         private Thread tGeneratorManager;
         private Thread tMultiplierManager;
         private IDataBase _db;
+        private IMemoryDataManager _memoryDataManager;
 
-        public Processor(IDataBase db)
+        public Processor(IDataBase db, IMemoryDataManager mdm)
         {
             _db = db;
+            _memoryDataManager = mdm;
         }
 
-        internal void Start(Input input)
+        internal string Start(Input input)
         {
             try
             {
-                if(tGeneratorManager == null || (tGeneratorManager.ThreadState == ThreadState.Stopped
-                        || tMultiplierManager.ThreadState == ThreadState.Stopped))
+                if (_memoryDataManager.GetCurrentProcessingState() == State.Processing ||
+                    _memoryDataManager.GetCurrentProcessingState() == State.Error)
                 {
                     _memoryDataManager = new MemoryDataManager();
                     _memoryDataManager.UpdateState(State.Processing);
                     _memoryDataManager.SetCurrentTotal(input.XBatches * input.YNumbers);
                     CallGenerator(input);
-                }
-                else if(tGeneratorManager.ThreadState == ThreadState.Running
-                        || tMultiplierManager.ThreadState == ThreadState.Running)
-                {
-                    // TODO return message
+                    return "Started";
                 }
                 else
                 {
-                    
+                    return "Already Processing";
                 }
             }
             catch (System.Exception)
             {
                 _memoryDataManager.UpdateState(State.Error);
-                throw;
+                return "Error";
             }
         }
 
@@ -76,7 +73,7 @@ namespace BatchProcessor.API.Workers
         {
             return _memoryDataManager.GetCurrentProcessingState();
         }
-        
+
         public void HasFinished()
         {
             _memoryDataManager.HasFinished(_db);
