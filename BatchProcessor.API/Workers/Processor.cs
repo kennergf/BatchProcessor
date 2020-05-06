@@ -25,7 +25,7 @@ namespace BatchProcessor.API.Workers
         {
             try
             {
-                if (_memoryDataManager.GetCurrentProcessingState() == State.Processing ||
+                if (_memoryDataManager.GetCurrentProcessingState() == State.Waiting ||
                     _memoryDataManager.GetCurrentProcessingState() == State.Error)
                 {
                     _memoryDataManager = new MemoryDataManager();
