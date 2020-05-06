@@ -22,6 +22,7 @@ namespace BatchProcessor.API.Services
             batchLotViewModel.CurrentTotal = _MemoryData.CurrentTotal;
             batchLotViewModel.RemainingNumbers = _MemoryData.RemainingNumbers;
             batchLotViewModel.GrandTotal = GetGrandTotal(db);
+            // Convert list of numbers to list of batches
             var listGroupNumber = _MemoryData.Numbers.GroupBy(n => n.BatchSequence).ToList();
             foreach(var groupNumber in listGroupNumber)
             {
@@ -72,7 +73,7 @@ namespace BatchProcessor.API.Services
             _MemoryData.RemainingNumbers = currentTotal;
         }
 
-        public void HasFinished(IDataBase db)
+        public void PersistIfFinished(IDataBase db)
         {
             if(_MemoryData.State == State.Processing &&
                 _MemoryData.RemainingNumbers == 0)
@@ -85,15 +86,20 @@ namespace BatchProcessor.API.Services
 
         private long GetGrandTotal(IDataBase db)
         {
+            // If GrandTotal = 0, means first time here
+            // If State = Finished, means processing just finished
             if(_MemoryData.GrandTotal == 0 || _MemoryData.State == State.Finished)
             {
+                // Need to update GrandTotal from DB
                 _MemoryData.GrandTotal = db.GetGrandTotal();
                 if(_MemoryData.State == State.Finished)
                 {
+                    // Update state to Waiting so, a new processing can be performed
                     UpdateState(State.Waiting);
                 }
             }
 
+            // If processing, GrandTotal need to include currentTotal
             if(_MemoryData.State == State.Processing)
             {
                 return _MemoryData.GrandTotal + _MemoryData.CurrentTotal;

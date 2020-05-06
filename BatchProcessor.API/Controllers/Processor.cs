@@ -51,7 +51,7 @@ namespace BatchProcessor.API.Controllers
         [Route("GetProgress")]
         public BatchLotViewModel GetProgress()
         {
-            _Processor.HasFinished();
+            _Processor.PersistIfFinished();
             return _Processor.GetProgress();
         }
 

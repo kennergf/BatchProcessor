@@ -74,9 +74,9 @@ namespace BatchProcessor.API.Workers
             return _memoryDataManager.GetCurrentProcessingState();
         }
 
-        public void HasFinished()
+        public void PersistIfFinished()
         {
-            _memoryDataManager.HasFinished(_db);
+            _memoryDataManager.PersistIfFinished(_db);
         }
 
         void generator_NumberGenerated(object sender, NumberGeneratedEventArgs e)
