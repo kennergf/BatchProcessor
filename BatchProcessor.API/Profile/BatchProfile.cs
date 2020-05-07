@@ -5,9 +5,9 @@ using BatchProcessor.Data.Entities;
 
 namespace BatchProcessor.API.Profile
 {
-    public static class BatchProfile
+    internal static class BatchProfile
     {
-        public static List<List<BatchViewModel>> ConvertNumbersToBatches(List<Number> numbers)
+        internal static List<List<BatchViewModel>> ConvertNumbersToBatches(List<Number> numbers)
         {
             var listBatchViewModel = new List<List<BatchViewModel>>();
             var listGroupNumber = numbers.GroupBy(n => n.BatchSequence).ToList();

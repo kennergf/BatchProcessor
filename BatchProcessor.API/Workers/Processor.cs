@@ -15,7 +15,7 @@ namespace BatchProcessor.API.Workers
         private IDataBase _db;
         private IMemoryDataManager _memoryDataManager;
 
-        public Processor(IDataBase db, IMemoryDataManager mdm)
+        internal Processor(IDataBase db, IMemoryDataManager mdm)
         {
             _db = db;
             _memoryDataManager = mdm;
@@ -64,17 +64,17 @@ namespace BatchProcessor.API.Workers
             tMultiplierManager.Start(number);
         }
 
-        public BatchLotViewModel GetProgress()
+        internal BatchLotViewModel GetProgress()
         {
             return _memoryDataManager.GetProgress(_db);
         }
 
-        public State GetCurrentProcessingState()
+        internal State GetCurrentProcessingState()
         {
             return _memoryDataManager.GetCurrentProcessingState();
         }
 
-        public void PersistIfFinished()
+        internal void PersistIfFinished()
         {
             _memoryDataManager.PersistIfFinished(_db);
         }

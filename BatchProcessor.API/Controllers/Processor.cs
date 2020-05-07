@@ -23,7 +23,7 @@ namespace BatchProcessor.API.Controllers
             _Processor = new Processor(db, mdm);
         }
 
-        public string Test(int XBatches, int YNumbers)
+        public string Execute(int XBatches, int YNumbers)
         {
             return Execute(new Input(XBatches, YNumbers));
         }
@@ -39,7 +39,7 @@ namespace BatchProcessor.API.Controllers
                     return _Processor.Start(input);
                 }
 
-                return "Invalid Input!";
+                return "[  { \"Message\": \"Invalid Input!\"  } ]";
             }
             catch (System.Exception)
             {

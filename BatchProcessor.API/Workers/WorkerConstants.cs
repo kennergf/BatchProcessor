@@ -1,6 +1,6 @@
 namespace BatchProcessor.API.Workers
 {
-    public abstract class WorkerConstants
+    internal abstract class WorkerConstants
     {
         protected const int MinNumber = 1;
         protected const int MaxNumber = 100;

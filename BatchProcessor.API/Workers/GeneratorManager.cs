@@ -3,9 +3,9 @@ using BatchProcessor.API.Models;
 
 namespace BatchProcessor.API.Workers
 {
-    public class GeneratorManager : WorkerConstants
+    internal class GeneratorManager : WorkerConstants
     {
-        public void Run(object oInput)
+        internal void Run(object oInput)
         {
             var input = (Input)oInput;
             var random = new Random();
@@ -34,13 +34,13 @@ namespace BatchProcessor.API.Workers
                 handler(this, e);
             }
         }
-        public event EventHandler<NumberGeneratedEventArgs> NumberGenerated;
+        internal event EventHandler<NumberGeneratedEventArgs> NumberGenerated;
     }
 
-    public class NumberGeneratedEventArgs : EventArgs
+    internal class NumberGeneratedEventArgs : EventArgs
     {
-        public long Execution { get; set; }
-        public int BatchSequence { get; set; }
-        public int Number { get; set; }
+        internal long Execution { get; set; }
+        internal int BatchSequence { get; set; }
+        internal int Number { get; set; }
     }
 }

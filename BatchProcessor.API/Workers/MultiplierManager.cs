@@ -3,7 +3,7 @@ using BatchProcessor.Data.Entities;
 
 namespace BatchProcessor.API.Workers
 {
-    public class MultiplierManager : WorkerConstants
+    internal class MultiplierManager : WorkerConstants
     {
         internal void Run(object oNumber)
         {
@@ -30,14 +30,14 @@ namespace BatchProcessor.API.Workers
             }
         }
 
-        public event EventHandler<NumberMultipliedEventArgs> NumberMultiplied;
+        internal event EventHandler<NumberMultipliedEventArgs> NumberMultiplied;
     }
 
-    public class NumberMultipliedEventArgs : EventArgs
+    internal class NumberMultipliedEventArgs : EventArgs
     {
-        public long Execution { get; set; }
-        public int BatchSequence { get; set; }
-        public int Number { get; set; }
-        public int Total { get; set; }
+        internal long Execution { get; set; }
+        internal int BatchSequence { get; set; }
+        internal int Number { get; set; }
+        internal int Total { get; set; }
     }
 }

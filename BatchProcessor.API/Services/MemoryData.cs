@@ -6,22 +6,22 @@ using BatchProcessor.Data.Entities;
 namespace BatchProcessor.API.Services
 {
     [DataContract]
-    public class MemoryData
+    internal class MemoryData
     {
-        public MemoryData()
+        internal MemoryData()
         {
             Numbers = new List<Number>();
             State = State.Waiting;
         }
         [DataMember]
-        public List<Number> Numbers { get; set; }
+        internal List<Number> Numbers { get; set; }
         [DataMember]
-        public State State { get; set; }
+        internal State State { get; set; }
         [DataMember]
-        public int RemainingNumbers { get; set; }
+        internal int RemainingNumbers { get; set; }
         [DataMember]
-        public int CurrentTotal { get; set; }
+        internal int CurrentTotal { get; set; }
         [DataMember]
-        public long GrandTotal { get; set; }
+        internal long GrandTotal { get; set; }
     }
 }
