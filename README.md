@@ -1,7 +1,6 @@
 # BatchProcessor
 
-This app receive the input of two number between 1 and 10 to generate X batched with Y numbers per batch.
-To accomplish this, is made use of back-end processing.
+This app receive the input of two numbers between 1 and 10 to generate X batched with Y numbers per batch.
 
 # Environment
 
