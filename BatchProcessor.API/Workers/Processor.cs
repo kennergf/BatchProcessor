@@ -4,7 +4,9 @@ using BatchProcessor.API.Services;
 using BatchProcessor.Data.Entities;
 using BatchProcessor.API.ViewModels;
 using BatchProcessor.Data.Services;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("BatchProcessor.Test")]
 namespace BatchProcessor.API.Workers
 {
     internal class Processor
