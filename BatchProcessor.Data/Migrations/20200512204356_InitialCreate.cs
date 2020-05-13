@@ -47,15 +47,19 @@ namespace BatchProcessor.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BatchGroups",
+                name: "Numbers",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Execution = table.Column<long>(nullable: false),
+                    BatchSequence = table.Column<int>(maxLength: 10, nullable: false),
+                    Value = table.Column<int>(nullable: false),
+                    Total = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BatchGroups", x => x.Id);
+                    table.PrimaryKey("PK_Numbers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -63,7 +67,7 @@ namespace BatchProcessor.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Sqlite:Autoincrement", true),
                     RoleId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -84,7 +88,7 @@ namespace BatchProcessor.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Sqlite:Autoincrement", true),
                     UserId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -164,45 +168,6 @@ namespace BatchProcessor.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Batches",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BatchGroupId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Batches", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Batches_BatchGroups_BatchGroupId",
-                        column: x => x.BatchGroupId,
-                        principalTable: "BatchGroups",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Numbers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Value = table.Column<int>(nullable: false),
-                    BatchId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Numbers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Numbers_Batches_BatchId",
-                        column: x => x.BatchId,
-                        principalTable: "Batches",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -212,8 +177,7 @@ namespace BatchProcessor.Data.Migrations
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
                 column: "NormalizedName",
-                unique: true,
-                filter: "[NormalizedName] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
@@ -239,18 +203,7 @@ namespace BatchProcessor.Data.Migrations
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
-                unique: true,
-                filter: "[NormalizedUserName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Batches_BatchGroupId",
-                table: "Batches",
-                column: "BatchGroupId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Numbers_BatchId",
-                table: "Numbers",
-                column: "BatchId");
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -278,12 +231,6 @@ namespace BatchProcessor.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Batches");
-
-            migrationBuilder.DropTable(
-                name: "BatchGroups");
         }
     }
 }

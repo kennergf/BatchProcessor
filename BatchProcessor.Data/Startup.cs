@@ -14,7 +14,7 @@ namespace BatchProcessor.Data
 {
     public class Startup
     {
-        private IConfiguration Configuration {get;}
+        private IConfiguration Configuration { get; }
 
         public Startup(IConfiguration configuration)
         {
@@ -25,7 +25,10 @@ namespace BatchProcessor.Data
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<BPContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<BPContext>(op => 
+                op.UseSqlite("Data Source=SqliteBatch.db"));
+            // services.AddDbContext<BPContext>(options => 
+            //     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<BPContext>()
                 .AddDefaultTokenProviders();

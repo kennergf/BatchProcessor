@@ -24,7 +24,9 @@ namespace BatchProcessor.API
         {
             services.AddControllers();
             services.AddCors();
-            services.AddDbContext<BPContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<BPContext>(op => 
+                op.UseSqlite("Data Source=SqliteBatch.db"));
+            //services.AddDbContext<BPContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             // Add DataBase using DI to be easy to change for NoSQL for example
             services.AddScoped<IDataBase, DataBase>();
             services.AddSingleton<IMemoryDataManager, MemoryDataManager>();
